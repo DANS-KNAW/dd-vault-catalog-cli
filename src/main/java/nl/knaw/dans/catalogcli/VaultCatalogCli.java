@@ -18,17 +18,18 @@ package nl.knaw.dans.catalogcli;
 import lombok.extern.slf4j.Slf4j;
 import nl.knaw.dans.catalogcli.client.ApiClient;
 import nl.knaw.dans.catalogcli.client.DefaultApi;
+import nl.knaw.dans.catalogcli.command.AddDataset;
 import nl.knaw.dans.catalogcli.command.CreateSkeletonRecord;
 import nl.knaw.dans.catalogcli.config.VaultCatalogConfig;
 import nl.knaw.dans.lib.util.AbstractCommandLineApp;
-import nl.knaw.dans.lib.util.CliVersionProvider;
 import nl.knaw.dans.lib.util.ClientProxyBuilder;
+import nl.knaw.dans.lib.util.PicocliVersionProvider;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @Command(name = "vault-catalog",
          mixinStandardHelpOptions = true,
-         versionProvider = CliVersionProvider.class,
+         versionProvider = PicocliVersionProvider.class,
          description = "Manage the Data Vault Catalog.")
 @Slf4j
 public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> {
@@ -50,7 +51,7 @@ public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> 
             .build();
         log.debug("Configuring command line");
         commandLine
-            .addSubcommand(new CreateSkeletonRecord(api));
-
+            .addSubcommand(new CreateSkeletonRecord(api))
+            .addSubcommand(new AddDataset(api));
     }
 }
