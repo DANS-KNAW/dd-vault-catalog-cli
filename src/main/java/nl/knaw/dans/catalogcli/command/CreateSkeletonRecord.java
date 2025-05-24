@@ -42,11 +42,11 @@ public class CreateSkeletonRecord implements Callable<Integer> {
             required = true)
     private String nbn;
 
-    @Option(names = { "-d", "--datastation", "--data-station" },
-            description = "The datastation from which the dataset was exported. If the NBN refers to a new dataset, this option is required. If the NBN refers to an existing dataset, this option is ignored.")
-    private String datastation;
+    @Option(names = { "-r", "--ocfl-storage-root"},
+            description = "The OCFL Storage Root this dataset is stored in. If the NBN refers to a new dataset, this option is required. If the NBN refers to an existing dataset, this option is ignored.")
+    private String ocflStorageRoot;
 
-    @Option(names = { "-o", "--ocfl-object-version-number" },
+    @Option(names = { "-v", "--ocfl-object-version-number" },
             description = "The OCFL object version number of the dataset version export.",
             required = true)
     private Integer ocflObjectVersionNumber;
@@ -94,7 +94,7 @@ public class CreateSkeletonRecord implements Callable<Integer> {
     private DatasetDto createDataset(String nbn) throws ApiException {
         var datasetDto = new DatasetDto()
             .nbn(nbn)
-            .datastation(datastation)
+            .ocflStorageRoot(ocflStorageRoot)
             .addVersionExportsItem(new VersionExportDto()
                 .datasetNbn(nbn)
                 .bagId(bagId)

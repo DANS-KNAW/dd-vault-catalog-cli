@@ -34,6 +34,8 @@
     <properties>
         <main-class>nl.knaw.dans.catalogcli.VaultCatalogCli</main-class>
         <command-name>vault-catalog</command-name>
+        <!--TODO: move to parent pom.xml-->
+        <dd-vault-catalog-api.version>0.9.0</dd-vault-catalog-api.version>
     </properties>
     <dependencies>
         <dependency>
