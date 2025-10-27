@@ -18,6 +18,7 @@ package nl.knaw.dans.catalogcli.command;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import nl.knaw.dans.catalogcli.client.DefaultApi;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -28,6 +29,7 @@ import java.util.concurrent.Callable;
          mixinStandardHelpOptions = true,
          description = "Retrieve unconfirmed dataset version exports from the Data Vault Catalog.")
 @RequiredArgsConstructor
+@Slf4j
 public class GetUnconfirmedVersionExports implements Callable<Integer> {
     @NonNull
     private final DefaultApi api;
@@ -46,13 +48,14 @@ public class GetUnconfirmedVersionExports implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            var dves = api.getUnconfirmedDatasetVersionExports(limit, offset);
-            String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dves);
+            var unconfirmedItems = api.getUnconfirmedDatasetVersionExports(limit, offset);
+            String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(unconfirmedItems);
             System.out.println(json);
             return 0;
         }
         catch (Exception e) {
             System.err.println("Error retrieving unconfirmed dataset version exports: " + e.getMessage());
+            log.error("Error retrieving unconfirmed dataset version exports", e);
             return 1;
         }
 
