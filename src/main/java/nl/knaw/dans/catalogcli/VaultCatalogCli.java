@@ -15,11 +15,16 @@
  */
 package nl.knaw.dans.catalogcli;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import nl.knaw.dans.catalogcli.client.ApiClient;
 import nl.knaw.dans.catalogcli.client.DefaultApi;
 import nl.knaw.dans.catalogcli.command.AddDataset;
 import nl.knaw.dans.catalogcli.command.CreateSkeletonRecord;
+import nl.knaw.dans.catalogcli.command.GetUnconfirmedVersionExports;
+import nl.knaw.dans.catalogcli.command.SetArchivedTimestamp;
 import nl.knaw.dans.catalogcli.config.VaultCatalogConfig;
 import nl.knaw.dans.lib.util.AbstractCommandLineApp;
 import nl.knaw.dans.lib.util.ClientProxyBuilder;
@@ -33,6 +38,8 @@ import picocli.CommandLine.Command;
          description = "Manage the Data Vault Catalog.")
 @Slf4j
 public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> {
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     public static void main(String[] args) throws Exception {
         new VaultCatalogCli().run(args);
     }
@@ -49,9 +56,13 @@ public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> 
             .httpClient(config.getVaultCatalogService().getHttpClient())
             .defaultApiCtor(DefaultApi::new)
             .build();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         log.debug("Configuring command line");
         commandLine
             .addSubcommand(new CreateSkeletonRecord(api))
-            .addSubcommand(new AddDataset(api));
+            .addSubcommand(new AddDataset(api))
+            .addSubcommand(new GetUnconfirmedVersionExports(api, objectMapper))
+            .addSubcommand(new SetArchivedTimestamp(api));
     }
 }
