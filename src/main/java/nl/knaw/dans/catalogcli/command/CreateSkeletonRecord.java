@@ -67,8 +67,11 @@ public class CreateSkeletonRecord implements Callable<Integer> {
             var optDataset = getDataset(nbn);
             if (optDataset.isEmpty()) {
                 createDataset(nbn);
+                System.err.println("Created skeleton record for new dataset with NBN " + nbn);
+            } else {
+                createNewVersionExportInExistingDataset();
+                System.err.println("Created skeleton record for version " + ocflObjectVersionNumber + " in existing dataset with NBN " + nbn);
             }
-            System.err.println("Created skeleton record for dataset with NBN " + nbn);
             return 0;
         }
         catch (ApiException e) {
@@ -104,6 +107,17 @@ public class CreateSkeletonRecord implements Callable<Integer> {
 
         api.addDataset(nbn, datasetDto);
         return datasetDto;
+    }
+
+    private void createNewVersionExportInExistingDataset() throws ApiException {
+        var versionExportDto = new VersionExportDto()
+            .datasetNbn(nbn)
+            .bagId(bagId)
+            .ocflObjectVersionNumber(ocflObjectVersionNumber)
+            .createdTimestamp(getCreationTimestamp())
+            .skeletonRecord(true);
+
+        api.setVersionExport(nbn, ocflObjectVersionNumber, versionExportDto);
     }
 
     private OffsetDateTime getCreationTimestamp() {
