@@ -21,7 +21,7 @@
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>1.10.0</version>
+        <version>1.11.0</version>
     </parent>
     <artifactId>dd-vault-catalog-cli</artifactId>
     <version>1.0.1-SNAPSHOT</version>
@@ -34,8 +34,6 @@
     <properties>
         <main-class>nl.knaw.dans.catalogcli.VaultCatalogCli</main-class>
         <command-name>vault-catalog</command-name>
-        <!--TODO: move to parent pom.xml-->
-        <dd-vault-catalog-api.version>0.10.0</dd-vault-catalog-api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -93,7 +91,6 @@
         <dependency>
             <groupId>nl.knaw.dans</groupId>
             <artifactId>dd-vault-catalog-api</artifactId>
-            <version>${dd-vault-catalog-api.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
