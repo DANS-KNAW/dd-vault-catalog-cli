@@ -117,7 +117,7 @@ public class CreateSkeletonRecord implements Callable<Integer> {
             .createdTimestamp(getCreationTimestamp())
             .skeletonRecord(true);
 
-        api.setVersionExport(nbn, ocflObjectVersionNumber, versionExportDto);
+        api.addVersionExport(nbn, versionExportDto);
     }
 
     private OffsetDateTime getCreationTimestamp() {
