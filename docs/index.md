@@ -1,39 +1,25 @@
-vault-catalog
-=============
-Command line tool to interact with the `dd-vault-catalog` service.
+dd-vault-catalog-cli
+======================
+
+Provides the `vault-catalog` command to interact with `dd-vault-catalog` service via its [REST API]{:target=_blank}.
 
 SYNOPSIS
 --------
 
-```shell
-vaul-catalog [OPTIONS] COMMAND [ARGS]...
+```bash
+vault-catalog add-dataset [ -n <nbn> ] <json-file>
+vault-catalog create-skeleton-record -n <nbn> [ -r <ocfl-storage-root> ] \
+   -v <ocfl-object-version-number> -b <bag-id> [ -c <creation-timestamp> ]
+vault-catalog get-unconfirmed-version-exports [ -l <limit> ] [ -o <offset> ]
+vault-catalog set-archived-timestamp -n <nbn> -v <ocfl-object-version-number> \
+   -a <archived-timestamp>
 ```
 
-DESCRIPTION
------------
-This package provides the `vault-catalog` command, to interact with the `dd-vault-catalog` service via its [REST API]{:target=_blank}.
+For more information use:
 
-[REST API]: https://dans-knaw.github.io/dd-vault-catalog/swagger-ui/
-
-INSTALLATION AND CONFIGURATION
-------------------------------
-Currently, this project is built as an RPM package for RHEL8 compatible OSes and later. The RPM will install the binaries to
-`/opt/dans.knaw.nl/dd-vault-catalog-cli` and the configuration files to `/etc/opt/dans.knaw.nl/dd-vault-catalog-cli`. The configuration options are documented by
-comments in the default configuration file `config.yml`.
-
-BUILDING FROM SOURCE
---------------------
-Prerequisites:
-
-* Java 17 or higher
-* Maven 3.6.3 or higher
-* RPM
-
-Steps:
-
-```shell 
-git clone https://github.com/DANS-KNAW/dd-vault-catalog-cli.git
-cd dd-vault-catalog-cli
-mvn clean install
+```bash
+vault-catalog --help
 ```
+
+[REST API]: {{ vault_catalog_api }}
 

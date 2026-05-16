@@ -14,15 +14,24 @@
 # limitations under the License.
 #
 
-site_name: dd-data-vault-cli
+site_name: dd-vault-catalog-cli
 theme:
   name: readthedocs
 
-repo_name: DANS-KNAW/dd-data-vault-cli
-repo_url: https://github.com/DANS-KNAW/dd-data-vault-cli
+repo_name: DANS-KNAW/dd-vault-catalog-cli
+repo_url: https://github.com/DANS-KNAW/dd-vault-catalog-cli
 
 nav:
-  - Manual: index.md
+  - Manual:
+      - Introduction: index.md
+      - Description: description.md
+      - Installation: installation.md
+      - Context: context.md
+  - Development:
+      - Overview: dev.md
+
+extra:
+  vault_catalog_api: https://dans-knaw.github.io/dd-vault-catalog/swagger-ui/
 
 plugins:
   - markdownextradata
