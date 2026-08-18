@@ -23,6 +23,7 @@ import nl.knaw.dans.catalogcli.client.ApiClient;
 import nl.knaw.dans.catalogcli.client.DefaultApi;
 import nl.knaw.dans.catalogcli.command.AddDataset;
 import nl.knaw.dans.catalogcli.command.CreateSkeletonRecord;
+import nl.knaw.dans.catalogcli.command.DeleteVersionExport;
 import nl.knaw.dans.catalogcli.command.GetUnconfirmedVersionExports;
 import nl.knaw.dans.catalogcli.command.SetArchivedTimestamp;
 import nl.knaw.dans.catalogcli.config.VaultCatalogConfig;
@@ -62,6 +63,7 @@ public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> 
         commandLine
             .addSubcommand(new CreateSkeletonRecord(api))
             .addSubcommand(new AddDataset(api))
+            .addSubcommand(new DeleteVersionExport(api))
             .addSubcommand(new GetUnconfirmedVersionExports(api, objectMapper))
             .addSubcommand(new SetArchivedTimestamp(api));
     }
