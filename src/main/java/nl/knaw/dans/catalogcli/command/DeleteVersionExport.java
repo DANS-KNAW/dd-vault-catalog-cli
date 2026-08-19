@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import nl.knaw.dans.catalogcli.client.ApiException;
 import nl.knaw.dans.catalogcli.client.DefaultApi;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
@@ -38,10 +39,13 @@ public class DeleteVersionExport implements Callable<Integer> {
     @Parameters(index = "1", paramLabel = "<version>", description = "The OCFL object version number to delete.")
     private Integer version;
 
+    @Option(names = {"-f", "--force"}, description = "Force deletion even if it's not the latest version.")
+    private boolean force;
+
     @Override
     public Integer call() {
         try {
-            api.deleteVersionExport(nbn, version);
+            api.deleteVersionExport(nbn, version, force);
             System.err.println("Successfully deleted version export " + nbn + " " + version);
         }
         catch (ApiException e) {
