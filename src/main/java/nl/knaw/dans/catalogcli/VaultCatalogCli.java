@@ -52,10 +52,10 @@ public class VaultCatalogCli extends AbstractCommandLineApp<VaultCatalogConfig> 
     @Override
     public void configureCommandLine(CommandLine commandLine, VaultCatalogConfig config) {
         DefaultApi api = new ClientProxyBuilder<ApiClient, DefaultApi>()
-            .apiClient(new ApiClient())
+            .apiClientCtor(ApiClient::new)
             .basePath(config.getVaultCatalogService().getUrl())
             .httpClient(config.getVaultCatalogService().getHttpClient())
-            .defaultApiCtor(DefaultApi::new)
+            .proxyCtor(DefaultApi::new)
             .build();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
