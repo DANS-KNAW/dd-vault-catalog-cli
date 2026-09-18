@@ -31,7 +31,7 @@
         <connection>scm:git:https://github.com/DANS-KNAW/dd-vault-catalog-cli</connection>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dd-vault-catalog-cli</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/DANS-KNAW/${project.artifactId}</url>
+        <url>https://github.com/DANS-KNAW/dd-vault-catalog-cli</url>
     </scm>
 
     <properties>
