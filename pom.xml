@@ -25,12 +25,12 @@
         <version>3.0.3</version>
     </parent>
     <artifactId>dd-vault-catalog-cli</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
     <name>DD Vault Catalog CLI</name>
     <scm>
         <connection>scm:git:https://github.com/DANS-KNAW/dd-vault-catalog-cli</connection>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dd-vault-catalog-cli</developerConnection>
-        <tag>v1.2.1</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/DANS-KNAW/dd-vault-catalog-cli</url>
     </scm>
 
